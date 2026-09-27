@@ -5,7 +5,7 @@
 Kılavuzlara göre CU2, DB12, shunt ve inverter aynı RJ45 dizilimini kullanıyor
 ([tablo](cihazlar.md#rj45-pin-dizilimleri-kılavuz)): **pin 1 CAN_L, 2 CAN_H, 5 GND, 6 B/D-, 7 A/D+**.
 Aynı kabloda iki hat birden var, hangisinin kullanıldığını bulmak gerekiyor.
-**MPPT farklı**: 1 izole +, 2 D+, 3 D-, 4 izole GND.
+**MPPT**: eski MC4870 kılavuzunda 1 izole +, 2 D+, 3 D-, 4 izole GND; senin modelinde (MC4885/48100, CAN'lı) farklı olabilir → önce ölç.
 
 1. Orijinal kabloyu bozma; bir RJ45 **splitter / ara geçiş** kullan.
 2. Sistem açıkken multimetreyle, GND = pin 5 alarak:

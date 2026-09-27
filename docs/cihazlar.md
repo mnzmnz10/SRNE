@@ -10,7 +10,7 @@ Kılavuzlarda yazanlar **[kılavuz]**, bizim çıkarımlarımız **[çıkarım]*
 |---|---|---|---|---|
 | SR-CU2 | 9600 (port 1–5, 7, 8); 115200 (port 6 = ekran) | 250k RV-C (port 1–6, 8) | TTL×2 9600, RS232, BLE, WiFi | Sistemin master'ı |
 | RMA7 ekran | 115200, **özel protokol** | — | — | CU2 port 6'ya bağlı [kurulum kılavuzu] |
-| MC4870N15 MPPT | 9600 Modbus, **izole** | **yok** | TTL 9600 Modbus, BLE | RJ45 dizilimi diğerlerinden farklı! |
+| MPPT (MC4885N15 / MC48100N15 ailesi?) | 9600 Modbus, izole | **kullanıcıya göre var**, dizilimi bilinmiyor | TTL 9600 Modbus, BLE | Model teyit edilecek |
 | IBC12-3KW inverter | 9600 | RV-C (opsiyonel) | BLE, TTL | RJ45'te uzaktan açma (SW1/SW2) ve 5V çıkışı var |
 | BS48500 shunt | 9600 Modbus | var | BLE | |
 | SR-DB12 dağıtım kutusu | 9600 + ekran portu 115200 (özel) | 250k RV-C, 2.0B extended | BLE | Dahili CAN sonlandırma direnci yok |
@@ -31,10 +31,15 @@ Pin numaraları kılavuz çizimlerindeki numaralardır; fiziksel yönü multimet
 | 7 | A/D+ | A/D+ | A/D+ | A/D+ | A/D+ | A/D+ | D+ | D+ | NC |
 | 8 | NC | VCC 13.2V | NC | B/D- | NC | +13.75V | NC | **+5V çıkış** | NC |
 
+> ⚠ MPPT sütunu, yüklenen **MC4860/4870** kılavuzundan. Kullanıcının kitapçığı
+> **MC4885N15 / MC48100N15 / MC4885N25 / MC48100N25** ailesine ait ve cihazda CAN olduğu
+> belirtildi; yeni modelin RJ45 dizilimi farklı olabilir. Kendi kitapçığındaki haberleşme
+> portu sayfasına göre güncellenecek.
+
 Sonuçlar:
 - CU2, DB12, shunt ve inverter **aynı dizilimi** kullanıyor: düz RJ45 kabloyla CAN (1-2) ve
   RS485 (6-7) aynı anda taşınıyor. Hangisinin kullanıldığı hattı dinleyerek anlaşılacak.
-- **MPPT uyumsuz**: D+/D- 2-3'te, pin 1'de izole besleme girişi var. Düz kabloyla CU2'nin
+- **MPPT (eski MC4870 kılavuzuna göre) uyumsuz**: D+/D- 2-3'te, pin 1'de izole besleme girişi var. Düz kabloyla CU2'nin
   RS485/CAN portuna takılırsa CU2'nin CAN_L'si MPPT'nin besleme pinine gelir.
   [çıkarım] MPPT büyük ihtimalle CU2'nin **TTL1/TTL2** portuna bağlanıyor (ikisi de 4 pin,
   12.8–13.2V besleme + TX/RX + GND, 9600 Modbus) ya da özel bir çevirici kablo kullanılıyor.
@@ -60,10 +65,17 @@ Sonuçlar:
 Montaj şemasında portlara bağlanan cihazlar: Battery protector, RV controller, Inverter,
 Coulombmeter, LCD, DCI controller, Energy storage battery BMS.
 
-## MC4870N15 MPPT
+## MPPT — MC48xxN15 ailesi
 
-- 12/24/36/48V otomatik, 70A, 150V PV. RS485 izole + TTL, 9600, Modbus.
-- Şarj akımı limiti register **0xE001**, 0.00–100.00A (kılavuzda geçiyor).
+- Kullanıcının kitapçığı (sayfa 08, teknik parametreler): MC4885N15 / MC48100N15 (150V PV),
+  MC4885N25 / MC48100N25 (250V PV). 12/24/36/48V, 9–64V akü, maks. PV akımı 70A,
+  şarj akımı 85A veya 100A (ayarlanabilir 0–85 / 0–100A), MPPT aralığı akü+2…120V (N15).
+  Haberleşme satırı: "TTL / izole RS485, 9600, 1 stop, paritesiz", BLE 4.0,
+  programlanabilir röle DPST 10A. Kullanıcı cihazda CAN portu olduğunu belirtti.
+- [ ] Etiketteki tam model (85A mı 100A mı?)
+- [ ] Kitapçıktaki haberleşme portu / RJ45 pin sayfası
+- Aşağıdaki bilgiler yüklenen MC4860/4870 kılavuzundan; aynı ailede büyük ihtimalle geçerli:
+- Şarj akımı limiti register **0xE001**, 0.00–100.00A.
 - Kullanıcı tanımlı (USE) modda tüm voltaj eşikleri **9–17V** aralığında (12V bazlı).
   Varsayılanlar (kapalı kurşun asit): aşırı voltaj 16.0, eşitleme 14.6, boost 14.4, float 13.8,
   boost dönüş 13.2, aşırı deşarj dönüş 12.6, düşük voltaj uyarısı 12.0, aşırı deşarj 11.1,

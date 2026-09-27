@@ -9,7 +9,7 @@ değiştirebilmek ve karavan için kendi akü/enerji göstergemizi yapmak.
 |---|---|---|
 | SR-CU2 Master Control | Merkez: cihazları sorgular, BT/WiFi, 6 röle, 8 sıcaklık/tank girişi | RS485 9600 + CAN 250k **RV-C**, TTL, RS232 |
 | RMA7 LCD Display | 7" dokunmatik ekran, CU2 port 6 | RS485 **115200, özel protokol** |
-| MC4870N15 MPPT (70A / 150V) | Solar şarj | Modbus RS485 (izole) / TTL, 9600 — CAN yok ([harita](registers/srne_mc.yaml)) |
+| MC4885N15 / MC48100N15 MPPT (model teyit edilecek) | Solar şarj | Modbus RS485 (izole) / TTL 9600, CAN ([harita](registers/srne_mc.yaml)) |
 | IBC12-3KW inverter/şarj | 12V 3kW inverter + şebeke şarjı | RS485 9600, RV-C (opsiyonel) |
 | DCI12-1230 DC-DC | Alternatörden 30A şarj | RS485, CAN, TTL, BLE |
 | BS48500 Battery Shunt | 500A akım / SOC | Modbus RS485, CAN, BLE |
@@ -57,7 +57,7 @@ ESP32 yazılımları: [RS485 sniffer](firmware/esp32-sniffer), [CAN sniffer](fir
 ## Güvenlik
 
 - Şarj voltajı / kesme eşiği hatalı yazılırsa akü zarar görür; lityumda yangın riski vardır.
-- **MPPT'nin RJ45 dizilimi diğer cihazlardan farklı.** Kabloları karıştırma, pinleri ölçmeden bağlama.
+- Eski MPPT kılavuzunda RJ45 dizilimi diğer cihazlardan farklı; kendi modelin teyit edilene kadar pinleri ölçmeden bağlama.
 - CU2 port 6 ve DB12 ekran portu 13.2–13.75V, inverter portu 5V besleme veriyor.
 - Modbus hattında tek master olur: CU2 bağlıyken `probe.py` çalıştırma.
 - Yazma işlemleri bilerek henüz eklenmedi; doğrulanınca sınır kontrollü eklenecek.
