@@ -9,7 +9,7 @@ değiştirebilmek ve karavan için kendi akü/enerji göstergemizi yapmak.
 |---|---|---|
 | SR-CU2 Master Control | Merkez: cihazları sorgular, BT/WiFi, 6 röle, 8 sıcaklık/tank girişi | RS485 9600 + CAN 250k **RV-C**, TTL, RS232 |
 | RMA7 LCD Display | 7" dokunmatik ekran, CU2 port 6 | RS485 **115200, özel protokol** |
-| MC4885N15 / MC48100N15 MPPT (model teyit edilecek) | Solar şarj | Modbus RS485 (izole) / TTL 9600, CAN ([harita](registers/srne_mc.yaml)) |
+| MC4885N25 MPPT (85A / 250V PV) | Solar şarj | Modbus RS485 (izole) / TTL 9600, CAN ([harita](registers/srne_mc.yaml)) |
 | IBC12-3KW inverter/şarj | 12V 3kW inverter + şebeke şarjı | RS485 9600, RV-C (opsiyonel) |
 | DCI12-1230 DC-DC | Alternatörden 30A şarj | RS485, CAN, TTL, BLE |
 | BS48500 Battery Shunt | 500A akım / SOC | Modbus RS485, CAN, BLE |

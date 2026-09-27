@@ -1,4 +1,4 @@
-# SRNE ML/MC serisi MPPT (MC48xxN15 ailesi) Modbus register haritası.
+# SRNE ML/MC serisi MPPT (MC4885N25) Modbus register haritası.
 #
 # Kaynak: SRNE'nin ML/MC serisi Modbus protokolü ve aynı protokolü kullanan
 # Renogy Rover/Wanderer dokümanları. Bu dosya hafızadan/topluluk
@@ -60,7 +60,7 @@ registers:
   # tutulur (24V sistemde gerçek değer x2). Cihazdan okunarak teyit edilecek.
 # Kılavuz: kullanıcı modunda tüm voltaj eşikleri 9-17V (12V bazlı), gecikme 1-30s,
 # eşitleme/boost süresi 10-600 dk.
-  0xE001: {name: charge_current_limit, type: u16, scale: 0.01, unit: A, desc: "kılavuz: 0.00-100.00A; MC4885 modelinde üst sınır 85A", writable: true, verified: false}
+  0xE001: {name: charge_current_limit, type: u16, scale: 0.01, unit: A, desc: "0.00-85.00A (MC4885N25 nominal 85A)", writable: true, verified: false}
   0xE002: {name: battery_capacity, type: u16, unit: Ah, writable: true, verified: false}
   0xE003: {name: system_voltage, type: u16, desc: "yüksek byte ayar, düşük byte algılanan (V)", writable: true, verified: false}
   0xE004: {name: battery_type, type: u16, desc: "0 kullanıcı, 1 açık, 2 kapalı(AGM), 3 jel, 4 lityum", writable: true, verified: false}

@@ -10,7 +10,7 @@ Kılavuzlarda yazanlar **[kılavuz]**, bizim çıkarımlarımız **[çıkarım]*
 |---|---|---|---|---|
 | SR-CU2 | 9600 (port 1–5, 7, 8); 115200 (port 6 = ekran) | 250k RV-C (port 1–6, 8) | TTL×2 9600, RS232, BLE, WiFi | Sistemin master'ı |
 | RMA7 ekran | 115200, **özel protokol** | — | — | CU2 port 6'ya bağlı [kurulum kılavuzu] |
-| MPPT (MC4885N15 / MC48100N15 ailesi?) | 9600 Modbus, izole | **kullanıcıya göre var**, dizilimi bilinmiyor | TTL 9600 Modbus, BLE | Model teyit edilecek |
+| MC4885N25 MPPT | 9600 Modbus, izole | **kullanıcıya göre var**, dizilimi bilinmiyor | TTL 9600 Modbus, BLE | CAN pin dizilimi bilinmiyor |
 | IBC12-3KW inverter | 9600 | RV-C (opsiyonel) | BLE, TTL | RJ45'te uzaktan açma (SW1/SW2) ve 5V çıkışı var |
 | BS48500 shunt | 9600 Modbus | var | BLE | |
 | SR-DB12 dağıtım kutusu | 9600 + ekran portu 115200 (özel) | 250k RV-C, 2.0B extended | BLE | Dahili CAN sonlandırma direnci yok |
@@ -72,7 +72,9 @@ Coulombmeter, LCD, DCI controller, Energy storage battery BMS.
   şarj akımı 85A veya 100A (ayarlanabilir 0–85 / 0–100A), MPPT aralığı akü+2…120V (N15).
   Haberleşme satırı: "TTL / izole RS485, 9600, 1 stop, paritesiz", BLE 4.0,
   programlanabilir röle DPST 10A. Kullanıcı cihazda CAN portu olduğunu belirtti.
-- [ ] Etiketteki tam model (85A mı 100A mı?)
+- **Etiket (teyitli): MC4885N25** — 12/24/36/48V/Auto, şarj akımı **85A**, maks. PV voltajı **250V**,
+  maks. PV gücü 1100W/12V, 2200W/24V, 3300W/36V, 4400W/48V, üretim 2025.09.
+  N25 → MPPT aralığı akü + 2…180V.
 - [ ] Kitapçıktaki haberleşme portu / RJ45 pin sayfası
 - Aşağıdaki bilgiler yüklenen MC4860/4870 kılavuzundan; aynı ailede büyük ihtimalle geçerli:
 - Şarj akımı limiti register **0xE001**, 0.00–100.00A.
