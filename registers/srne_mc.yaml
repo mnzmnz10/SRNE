@@ -1,0 +1,77 @@
+# SRNE ML/MC serisi MPPT (MC4870N15) Modbus register haritası.
+#
+# Kaynak: SRNE'nin ML/MC serisi Modbus protokolü ve aynı protokolü kullanan
+# Renogy Rover/Wanderer dokümanları. Bu dosya hafızadan/topluluk
+# kaynaklarından derlendi: "verified: false" olan her satır, gerçek cihazdan
+# okunan değerle karşılaştırılıp doğrulanana kadar tahmin kabul edilmeli.
+#
+# type: u16 | s16 | u32 (iki register, yüksek word önce) | str (ASCII) |
+#       temp_pair (yüksek byte = kontrolcü, düşük byte = akü; bit7 = eksi işaret)
+# scale: ham değerin çarpanı (0.1 -> 123 = 12.3)
+
+device: SRNE MC serisi MPPT
+default_address: 1
+baud: 9600
+
+registers:
+  # --- Ürün bilgisi (salt okunur) ---
+  0x000A: {name: rated_voltage_current, type: u16, desc: "yüksek byte max sistem V, düşük byte nominal şarj A", verified: false}
+  0x000B: {name: rated_discharge_type, type: u16, desc: "yüksek byte deşarj A, düşük byte ürün tipi", verified: false}
+  0x000C: {name: model, type: str, length: 8, desc: "model adı, 16 ASCII karakter", verified: false}
+  0x0014: {name: software_version, type: u32, verified: false}
+  0x0016: {name: hardware_version, type: u32, verified: false}
+  0x0018: {name: serial_number, type: u32, verified: false}
+  0x001A: {name: device_address, type: u16, verified: false}
+
+  # --- Anlık veriler (salt okunur) ---
+  0x0100: {name: battery_soc, type: u16, unit: "%", verified: false}
+  0x0101: {name: battery_voltage, type: u16, scale: 0.1, unit: V, verified: false}
+  0x0102: {name: charge_current, type: u16, scale: 0.01, unit: A, verified: false}
+  0x0103: {name: temperatures, type: temp_pair, unit: "°C", desc: "kontrolcü / akü sıcaklığı", verified: false}
+  0x0104: {name: load_voltage, type: u16, scale: 0.1, unit: V, verified: false}
+  0x0105: {name: load_current, type: u16, scale: 0.01, unit: A, verified: false}
+  0x0106: {name: load_power, type: u16, unit: W, verified: false}
+  0x0107: {name: pv_voltage, type: u16, scale: 0.1, unit: V, verified: false}
+  0x0108: {name: pv_current, type: u16, scale: 0.01, unit: A, verified: false}
+  0x0109: {name: charge_power, type: u16, unit: W, verified: false}
+  0x010B: {name: battery_min_voltage_today, type: u16, scale: 0.1, unit: V, verified: false}
+  0x010C: {name: battery_max_voltage_today, type: u16, scale: 0.1, unit: V, verified: false}
+  0x010D: {name: max_charge_current_today, type: u16, scale: 0.01, unit: A, verified: false}
+  0x010E: {name: max_discharge_current_today, type: u16, scale: 0.01, unit: A, verified: false}
+  0x010F: {name: max_charge_power_today, type: u16, unit: W, verified: false}
+  0x0110: {name: max_discharge_power_today, type: u16, unit: W, verified: false}
+  0x0111: {name: charge_ah_today, type: u16, unit: Ah, verified: false}
+  0x0112: {name: discharge_ah_today, type: u16, unit: Ah, verified: false}
+  0x0113: {name: generation_today, type: u16, desc: "birim doğrulanmalı (Wh veya 0.1 kWh)", verified: false}
+  0x0114: {name: consumption_today, type: u16, desc: "birim doğrulanmalı", verified: false}
+  0x0115: {name: operating_days, type: u16, unit: gün, verified: false}
+  0x0116: {name: over_discharge_count, type: u16, verified: false}
+  0x0117: {name: full_charge_count, type: u16, verified: false}
+  0x0118: {name: total_charge_ah, type: u32, unit: Ah, verified: false}
+  0x011A: {name: total_discharge_ah, type: u32, unit: Ah, verified: false}
+  0x011C: {name: total_generation, type: u32, desc: "birim doğrulanmalı", verified: false}
+  0x011E: {name: total_consumption, type: u32, desc: "birim doğrulanmalı", verified: false}
+  0x0120: {name: load_and_charge_state, type: u16, desc: "bit15 yük açık; düşük byte şarj durumu: 0 kapalı, 1 aktif, 2 MPPT, 3 eşitleme, 4 boost, 5 float, 6 akım sınırlama", verified: false}
+  0x0121: {name: fault_bits_hi, type: u16, verified: false}
+  0x0122: {name: fault_bits_lo, type: u16, verified: false}
+
+  # --- Ayarlar (okunur/yazılır) — YAZMADAN ÖNCE doğrula! ---
+  # Voltaj eşikleri çoğu firmware'de 12V sisteme normalize edilmiş halde
+  # tutulur (24V sistemde gerçek değer x2). Cihazdan okunarak teyit edilecek.
+  0xE002: {name: battery_capacity, type: u16, unit: Ah, writable: true, verified: false}
+  0xE003: {name: system_voltage, type: u16, desc: "yüksek byte ayar, düşük byte algılanan (V)", writable: true, verified: false}
+  0xE004: {name: battery_type, type: u16, desc: "0 kullanıcı, 1 açık, 2 kapalı(AGM), 3 jel, 4 lityum", writable: true, verified: false}
+  0xE005: {name: over_voltage_threshold, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE006: {name: charge_limit_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE007: {name: equalizing_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE008: {name: boost_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE009: {name: float_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE00A: {name: boost_return_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE00B: {name: over_discharge_return_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE00C: {name: under_voltage_warning, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE00D: {name: over_discharge_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE00E: {name: discharge_limit_voltage, type: u16, scale: 0.1, unit: V, writable: true, verified: false}
+  0xE010: {name: over_discharge_delay, type: u16, unit: s, writable: true, verified: false}
+  0xE011: {name: equalizing_time, type: u16, unit: dk, writable: true, verified: false}
+  0xE012: {name: boost_time, type: u16, unit: dk, writable: true, verified: false}
+  0xE013: {name: equalizing_interval, type: u16, unit: gün, writable: true, verified: false}
