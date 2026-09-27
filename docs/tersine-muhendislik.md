@@ -1,20 +1,21 @@
 # Tersine mühendislik adımları
 
-## 1. Pinleri ve fiziksel katmanı bul (sistem kapalıyken başla)
+## 1. Hangi hat aktif? (pin dizilimi artık biliniyor)
 
-Kabloların çoğu RJ45. SRNE portlarında genelde bazı pinlerde **akü voltajı / 5V besleme**
-olur (BT modülünü beslemek için). Rastgele bağlantı ESP32'yi veya adaptörü yakabilir.
+Kılavuzlara göre CU2, DB12, shunt ve inverter aynı RJ45 dizilimini kullanıyor
+([tablo](cihazlar.md#rj45-pin-dizilimleri-kılavuz)): **pin 1 CAN_L, 2 CAN_H, 5 GND, 6 B/D-, 7 A/D+**.
+Aynı kabloda iki hat birden var, hangisinin kullanıldığını bulmak gerekiyor.
+**MPPT farklı**: 1 izole +, 2 D+, 3 D-, 4 izole GND.
 
-1. Bir RJ45 **ara geçiş / splitter** (ya da kesip açılmış yedek kablo) hazırla; orijinal
-   kabloyu bozma.
-2. Sistem açık, multimetre ile her pini GND'ye göre ölç ve not al:
-   - 12–14V veya 5V sabit → besleme
-   - 0V → GND
-   - ~2–3V civarı dalgalanan iki pin → veri hattı (A/B veya CANH/CANL)
-3. Veri hattını ayırt et:
-   - **RS485**: boşta A > B (ör. A ≈ 3V, B ≈ 2V). Veri anında ikisi zıt yönde oynar.
-   - **CAN**: boşta ikisi de ≈ 2.5V. Veri anında CANH ≈ 3.5V'a çıkar, CANL ≈ 1.5V'a iner.
-   - **TTL UART / RS232** de olabilir (RS232'de ±5–12V görürsün).
+1. Orijinal kabloyu bozma; bir RJ45 **splitter / ara geçiş** kullan.
+2. Sistem açıkken multimetreyle, GND = pin 5 alarak:
+   - pin 1 ve 2 ikisi de ≈ 2.5V ve dalgalanıyorsa → **CAN aktif**
+     (veri anında CAN_H ≈ 3.5V, CAN_L ≈ 1.5V)
+   - pin 6-7 arası boşta birkaç yüz mV (A > B) ve dalgalanıyorsa → **RS485 aktif**
+   - Pin 1-2 ≈ 0V veya sabit ise CAN kullanılmıyor.
+3. CU2'nin her portunu (özellikle MPPT'nin bağlı olduğu, TTL olabilir) ayrı kontrol et.
+4. Sistem kapalıyken CAN_H–CAN_L arası direnç: ~60Ω iki uçtan sonlandırılmış,
+   ~120Ω tek uç, açık devre sonlandırma yok.
 
 ## 2. Lojik analizör ile baud ve protokol
 
@@ -47,8 +48,21 @@ python tools/sniff.py --port /dev/ttyUSB0 --baud 9600 --raw cu2-mppt.bin --jsonl
 - USB adaptörlerde zamanlama kaba olduğu için sniffer frame'leri CRC ile ayırır. Daha doğru
   zaman damgası için ESP32 sniffer'ı kullan.
 
-**CAN ise** — ESP32'nin dahili TWAI denetleyicisi + SN65HVD230 gibi bir transceiver ile
-listen-only modda dinlenir (firmware ayrıca eklenecek).
+**CAN ise** — ESP32 + SN65HVD230 ile [CAN sniffer](../firmware/esp32-can-sniffer) (listen-only):
+```bash
+python tools/rvc_sniff.py --esp32 /dev/ttyUSB0 --log cu2-port1.candump
+python tools/rvc_sniff.py --candump cu2-port1.candump --summary
+```
+Standart RV-C DGN'leri (DC_SOURCE_STATUS_1/2, CHARGER_STATUS, INVERTER_STATUS, TANK_STATUS)
+otomatik çözülür. `PROPRIETARY_DGN` (0xEF00/0x1EF00) mesajları SRNE'ye özel olabilir;
+ayar değişiklikleri büyük ihtimalle bunlarla veya standart *_COMMAND DGN'leriyle gider.
+Linux'ta bir USB-CAN adaptörün varsa `--socketcan can0` da kullanılabilir.
+
+**RMA7 hattı (CU2 port 6)** — RS485 **115200**, SRNE'ye özel protokol. Önce `--hexdump`:
+```bash
+python tools/sniff.py --port /dev/ttyUSB0 --baud 115200 --hexdump
+```
+Bu porttaki pin 3 ve 8'de 13.2V var; USB-RS485'e sadece 6, 7 ve 5'i (GND) bağla.
 
 ## 4. Anlamı çıkar: kontrollü deneyler
 
