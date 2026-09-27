@@ -46,6 +46,12 @@ def open_serial(port: str, baud: int):
     return serial.Serial(port, baud, timeout=0.02)
 
 
+def dump_line(ts: float, chunk: bytes) -> str:
+    # ASCII column makes text protocols (e.g. Pylontech RS485 "~20...") obvious.
+    text = "".join(chr(b) if 32 <= b < 127 else "." for b in chunk)
+    return f"{ts:.3f}  {chunk.hex(' ')}  |{text}|"
+
+
 def frames_from_serial(ser, raw_out, hexdump: bool, gap: float):
     splitter = StreamSplitter()
     chunk = bytearray()
@@ -59,14 +65,14 @@ def frames_from_serial(ser, raw_out, hexdump: bool, gap: float):
                 raw_out.flush()
             if hexdump:
                 if chunk and now - last > gap:
-                    print(f"{last:.3f}  {chunk.hex(' ')}")
+                    print(dump_line(last, bytes(chunk)))
                     chunk.clear()
                 chunk.extend(data)
                 last = now
                 continue
             yield from splitter.feed(data, now)
         elif hexdump and chunk and now - last > gap:
-            print(f"{last:.3f}  {chunk.hex(' ')}")
+            print(dump_line(last, bytes(chunk)))
             chunk.clear()
 
 

@@ -17,6 +17,9 @@ değiştirebilmek ve karavan için kendi akü/enerji göstergemizi yapmak.
 
 Pin dizilimleri ve ayrıntılar: [docs/cihazlar.md](docs/cihazlar.md)
 
+**Şu anki hedef:** 2 × 12.8V 310Ah akü + Bluetooth'lu JK BMS → ESP32 köprü → CU2 BMS portu → RMA7.
+Plan: [docs/jk-bms-plani.md](docs/jk-bms-plani.md)
+
 **RV-C** açık bir karavan CAN standardıdır (J1939 tabanlı). CU2 ile cihazlar arasında CAN
 kullanılıyorsa verilerin büyük kısmı standart DGN'lerle çözülebilir.
 
