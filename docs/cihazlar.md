@@ -49,6 +49,18 @@ Sonuçlar:
 - IBC12 pin 8'de 5V/200mA çıkış var; pin 3-4 (SW1/SW2) kısa devre = inverter AÇIK.
 - MPPT pin 5-6 kısa devre = şarj durur.
 
+## SR-CU2 — kullanıcının cihazı
+
+- Etiket: **SR-CU2 G2**, 10–100VDC, BLE 2.4GHz, WiFi 2.4/5GHz, TTL/RS232/RS485/CAN, üretim 2025.12.
+- Uygulama (Basic Info): Equipment type **Master**, Firmware **V3.0.8**, Firmware 2 **V3.0.2**,
+  Hardware **00030000**, Collector: WIFI & Ble.
+- Kasa üzerindeki port yazıları kılavuzla aynı: TTL1/TTL2, RS232, RS485/CAN 1–6, RS485 7,
+  BMS.RS485/CAN 8.
+- Uygulama sekmeleri: … Fuel tank, Temp, Switch, Basic Info, Album.
+- **Uygulamada CAN tipi / BMS protokolü seçimi bulunamadı** → CU2 portları büyük ihtimalle
+  sabit veya otomatik algılamalı bir protokol kullanıyor. Bu yüzden BMS portunu dinlemek
+  protokolü bulmanın ana yolu.
+
 ## SR-CU2 portları [kılavuz]
 
 | # | Port | Varsayılan |
