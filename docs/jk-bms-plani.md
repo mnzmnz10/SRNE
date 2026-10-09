@@ -3,6 +3,35 @@
 **Hedef:** 2 × 12.8V (4S LiFePO4) 310Ah akü, her birinde Bluetooth'lu JK BMS (200A).
 Bu aküleri RMA7 ekranında görmek.
 
+## Önce: SRNE shunt ile hazır gösterge (ek donanım gerekmez)
+
+BS48500 shunt bir SRNE cihazı. CU2 onu zaten tanıyor (montaj şemasında "Coulombmeter" portu var),
+RMA7 de verisini gösteriyor. Shunt doğru ayarlanınca **toplam akü bankası** için SOC, voltaj,
+akım, kalan süre ve marş aküsü voltajı köprüye hiç gerek kalmadan ekranda görünür.
+
+Shunt ayarları (SRNE uygulaması, varsayılan şifre 123456):
+
+| Ayar | Değer |
+|---|---|
+| Battery capacity | **620Ah** (2 × 310Ah paralel) |
+| Battery type | Lithium (ya da custom) |
+| System voltage | 12V |
+| Full voltage | Şarj voltajı − 0.2…0.3V (örnek: 14.2V şarjda ~13.9V). Lityum preset'i de olur |
+| Discharge cut-off voltage | Düşük voltaj uyarısı + 0.2…0.3V (örnek: ~12.0V) |
+| Full cut-off current | ~10–12A (~%2 × 620Ah; şarj akımı bunun altına düşünce "tam dolu" sayılır) |
+| Full detection time | Varsayılan |
+| Current SOC | Aküler tam dolduktan sonra %100 yap |
+| Zero current calibration | Yük eksi ucu sökülüyken bir kez yap |
+| Discharge depth (DOD) | %5 (varsayılan) |
+
+Kablolama kuralı: akülerin eksisinden çıkan **tek** kablo shunt'ın akü tarafına gider. Diğer bütün eksiler
+(inverter, MPPT, DC-DC, DB12, şasi) shunt'ın yük tarafına bağlanır. Aksi halde ölçüm eksik olur.
+
+**Shunt'ın gösteremedikleri** (köprünün getireceği ek değer): akü başına ayrı veri, hücre voltajları,
+hücre farkı/dengeleme, hücre sıcaklıkları, BMS alarmları ve bir BMS'in aküyü devreden çıkarması.
+Bunlar RMA7'de yeri olmayabileceği için en kolay yol köprünün **sadece telefon/web sayfasında**
+göstermesidir. Bu durumda CU2'ye hiç veri gönderilmez, şarj kontrolüne de dokunulmaz.
+
 ## Mimari
 
 ```
