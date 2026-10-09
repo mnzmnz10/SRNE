@@ -209,7 +209,7 @@ Yazılımın bir **simülasyon modu** olacak: JK yerine sabit değerler gönderi
 SOC %55, 13.20V, −5A, 22°C.
 
 Güvenlik: bu test sırasında CU2 bu veriyi şarj kontrolü için kullanabilir. O yüzden:
-1. MPPT'nin PV girişini (DB12/panel sigortası) ve şebeke şarjını **kapat**, DC-DC'yi motor
+1. MPPT'nin PV girişini (DB12/panel sigortası) (ve varsa AC akü şarj cihazını) **kapat**, DC-DC'yi motor
    çalışmıyorken test et.
 2. Simülasyondaki şarj limitleri güvenli ve düşük tutulacak (ör. 13.8V / 10A).
 3. Kartı BMS portuna tak, 12V'u 1A sigortayla ver.

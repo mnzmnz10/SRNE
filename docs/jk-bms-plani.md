@@ -99,6 +99,6 @@ Pylontech CAN 500k kullanır, CU2'nin varsayılanı 250k. Gerekirse sniffer'ı 5
 
 ## Adım 3: doğrulama
 
-- Önce PV ve şebeke şarjı kapalıyken bağla. RMA7'de değerleri kontrol et.
+- Önce PV (ve varsa AC şarj cihazı) kapalıyken bağla. RMA7'de değerleri kontrol et.
 - Bir BMS'in Bluetooth'unu kes (ESP32'yi uzaklaştır). Ekranda uyarı çıkmalı ve limitler düşmeli.
 - Sonra şarjı aç, akım limitlerine uyulduğunu shunt'tan izle.

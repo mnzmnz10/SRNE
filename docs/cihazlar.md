@@ -107,6 +107,13 @@ Coulombmeter, LCD, DCI controller, Energy storage battery BMS.
 ## IBC12-3KW inverter
 
 - Kullanıcı listesinde "SR-IC12" olarak geçti; yüklenen kılavuz IBC12-3KW. Etiketten teyit et.
+- **Transfer/bypass [kılavuz]:** şebeke bypass + inverter, kesintisiz otomatik geçiş, **<10 ms**.
+  AC IN 180–265VAC / 45–65Hz / maks. 16A; AC OUT1 15A, AC OUT2 16A; 30mA RCD.
+  Öncelik: *Mains priority* (varsayılan) veya *Inverter priority*: akü < 13.2V (12.0–14.0 ayarlı)
+  → şebekeye geç; akü > 14.2V 3 dk → invertere dön. N-G bağını inverter kendi rölesiyle yapar,
+  dışarıdan birleştirilmemeli.
+- **Bu kılavuzda şebekeden akü şarjı yok** (sadece bypass). Kullanıcı ilk listede "SR-IC12" yazdı;
+  etiketten gerçek model teyit edilecek.
 - Modlar: OFF / ON / ECO (ECO: varsayılan 30W altı yükte kapanıp 1 dk'da bir kontrol eder).
 - APP/haberleşme ile değiştirilen mod, fiziksel anahtar konumundan önceliklidir (son komut geçerli).
 
