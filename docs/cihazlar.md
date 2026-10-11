@@ -135,3 +135,17 @@ Coulombmeter, LCD, DCI controller, Energy storage battery BMS.
 - [ ] CU2 ↔ cihaz hatlarında RS485 mi CAN mi aktif (ikisi de aynı kabloda)?
 - [ ] RMA7 protokolü (RS485 115200, "özel")
 - [ ] Telefon uygulamasının adı
+
+## Eklenecek cihazlar (haberleşmesiz)
+
+- **SRNE AC serisi şebeke akü şarj cihazı** (ör. AC1225C, 12V 25A, 180–264VAC, IP65).
+  Kılavuzda sadece **Bluetooth** var; RS485/CAN/TTL yok → CU2'ye bağlanamaz.
+- **Ayrı transfer şalteri (ATS)** — haberleşmesi yok.
+- Ekranda gösterme planı:
+  1. Şarj akımı zaten **shunt** üzerinden akü akımı olarak RMA7'de görünür (net akım).
+  2. Şebeke varlığı / V / A / W / kWh için **PZEM-016** (RS485 Modbus, akım trafolu) →
+     Waveshare kartın RS485 portu → kartın web sayfası / telefon.
+  3. İsteğe bağlı: şebeke var/yok bilgisini CU2'nin boş bir **tank girişine** röle + direnç ile
+     vermek (0Ω / ~190Ω → %0 / %100) → RMA7'de "tank" olarak görünür.
+  4. AC şarj cihazının kendi Bluetooth verisi ileride ESP32 ile çözülebilir (protokol bilinmiyor).
+
