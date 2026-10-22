@@ -149,3 +149,17 @@ Coulombmeter, LCD, DCI controller, Energy storage battery BMS.
      vermek (0Ω / ~190Ω → %0 / %100) → RMA7'de "tank" olarak görünür.
   4. AC şarj cihazının kendi Bluetooth verisi ileride ESP32 ile çözülebilir (protokol bilinmiyor).
 
+
+## SRNE satış sonrası cevabı (21.10.2026)
+
+1. **AC giriş durumu:** RMA7 arayüzü AC giriş voltajını zaten gösteriyor; AC yoksa 0 V görünür.
+   (Not: bu değer büyük ihtimalle inverterin AC IN ölçümünden geliyor. İnverterin AC girişi
+   kullanılmıyorsa hep 0 V kalır → tank girişi yöntemi geçerliliğini korur.)
+2. **Türkçe:** RMA7 ve uygulama şu an sadece İngilizce; başka dil desteği yok.
+3. **BMS portu:** SRNE'nin iç protokolü, dışarıya açık değil; sadece SRNE'nin kendi uyumlu
+   cihazlarıyla çalışıyor.
+4. **Protokol dokümanları:** CU2 ve RMA7'nin RS485 Modbus ve RV-C CAN protokolleri iç protokol,
+   paylaşılmıyor.
+
+Sonuç: Protokoller için tek yol pasif dinleme. Öncelik: shunt ile RMA7 göstergesi + JK verisi
+için kartın telefon/web sayfası.
