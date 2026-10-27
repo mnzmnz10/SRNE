@@ -53,3 +53,12 @@ Ekran yazıları CU2'den metin olarak alıyorsa (TJC/Nextion tipinde sık), CU2 
 RS485 portlu bir ESP32 konur: CU2'den gelen her mesajı okur, İngilizce metinleri Türkçe'yle
 değiştirir, ekrana iletir. Ekran ve CU2'nin yazılımı hiç değişmez; ESP32 çıkarılınca her şey
 eskisi gibi olur. Gerekli: Waveshare kartın RS485'i + elindeki RS485 modülü (ikinci port).
+
+## Bulgu (kasa açıldı, 27.10.2026)
+
+- Ana kart: **TJC1060X570_011C** → TJC (Taojingchi) X5 serisi 7" 1024×600 seri HMI ekran.
+  İşlemci "AiHMI T8", Foresee NAND flash, **microSD yuvası**, RTC pil yuvası.
+- Kapaktaki yeşil kart SRNE'nin ara kartı: besleme ve RS485 ↔ TTL dönüşümü. TJC kartına 4 telli
+  TTL kablo ile bağlı.
+- Sonuç: Arayüz bir **.tft** dosyası (TJC'nin "USART HMI" programıyla hazırlanır) ve microSD ile
+  yüklenebilir. Çalışan .tft ekrandan geri okunamaz → orijinal dosya yedeklenemez.
