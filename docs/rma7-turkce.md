@@ -62,3 +62,11 @@ eskisi gibi olur. Gerekli: Waveshare kartın RS485'i + elindeki RS485 modülü (
   TTL kablo ile bağlı.
 - Sonuç: Arayüz bir **.tft** dosyası (TJC'nin "USART HMI" programıyla hazırlanır) ve microSD ile
   yüklenebilir. Çalışan .tft ekrandan geri okunamaz → orijinal dosya yedeklenemez.
+
+## RMA7 Settings/Screen sayfası (27.10.2026)
+
+- Ekran arayüz sürümü: **Ver 1.0.14** (CU2'nin V3.0.8 / V3.0.2 sürümlerinden ayrı).
+- Seçenekler: Brightness, Backlight time, Idle return to home page, Light/Dark Mode,
+  Temperature unit (°C/°F), Mode Selection (karavan / ev), Inverter switch display,
+  Restore Default, Reset screen.
+- **Dil seçeneği yok** (SRNE'nin "sadece İngilizce" cevabıyla uyumlu).
