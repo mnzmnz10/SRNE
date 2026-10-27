@@ -70,3 +70,12 @@ eskisi gibi olur. Gerekli: Waveshare kartın RS485'i + elindeki RS485 modülü (
   Temperature unit (°C/°F), Mode Selection (karavan / ev), Inverter switch display,
   Restore Default, Reset screen.
 - **Dil seçeneği yok** (SRNE'nin "sadece İngilizce" cevabıyla uyumlu).
+
+## İnternet araması (27.10.2026)
+
+- srnesolar.com ve srnesolar.us indirme sayfalarında (1–4. sayfalar) ve SR-RMA7 / SR-CU2 ürün
+  sayfalarında **hiçbir firmware, güncelleme dosyası ya da yazılım yok**; sadece kılavuz ve
+  datasheet'ler var. RMA7 ürün sayfasında dil, güncelleme ve SD kart hakkında bilgi yok.
+- Ürün sayfasından not: RMA7 **ekran şifresi 666666**, uyumlu ürünler DB12/CU2, RS485,
+  < 600mA, 1024×600.
+- Forumlarda da RMA7 için paylaşılmış dosya bulunamadı.
