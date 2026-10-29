@@ -1,0 +1,8 @@
+*.tft
+.venv/
+TFTTool/
+tjc-usart-hmi-toolchain/
+roboto/
+tftcrc
+crcprobe
+__pycache__/

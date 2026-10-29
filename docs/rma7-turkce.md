@@ -79,3 +79,8 @@ eskisi gibi olur. Gerekli: Waveshare kartın RS485'i + elindeki RS485 modülü (
 - Ürün sayfasından not: RMA7 **ekran şifresi 666666**, uyumlu ürünler DB12/CU2, RS485,
   < 600mA, 1024×600.
 - Forumlarda da RMA7 için paylaşılmış dosya bulunamadı.
+
+## Güncel durum (29.10.2026)
+Ekranın TJC1060X570 (X5) olduğu anlaşıldı ve SRNE'den V1.0.16 `.tft` dosyası geldi. Türkçeleştirme çalışması
+[`rma7-tr/`](../rma7-tr/README.md) klasöründe: biçim analizi, Türkçe glif üretimi, çeviri JSON'ları ve yama araçları.
+İlk deneme (yalnız Ayarlar/Ekran sayfası) hazır ama cihazda denenmedi. `.tft` dosyaları depoya konmuyor.

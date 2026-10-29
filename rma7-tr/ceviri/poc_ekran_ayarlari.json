@@ -1,0 +1,16 @@
+{
+  "aciklama": "PoC: yalnız Ayarlar/Ekran sayfasının etiketleri. Türkçe metin bayt sayısı İngilizceyi aşamaz.",
+  "metinler": [
+    ["Settings/Screen", "Ayarlar/Ekran"],
+    ["Brightness ", "Parlaklık"],
+    ["Restore Default", "Varsayılana Al"],
+    ["Backlight time", "Işık süresi"],
+    ["Idle return to home page", "Boşta ana sayfaya dön"],
+    ["Light/Dark Mode", "Açık/Koyu Mod"],
+    ["Temperature unit", "Isı birimi"],
+    ["Mode Selection", "Mod seçimi"],
+    ["Inverter switch display", "İnvertör düğmesi"],
+    ["Reset screen", "Sıfırla"],
+    ["BL Off Delay", "Oto. kapanma"]
+  ]
+}
