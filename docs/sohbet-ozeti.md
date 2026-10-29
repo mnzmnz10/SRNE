@@ -1,4 +1,4 @@
-# SRNE karavan projesi — sohbet özeti (28.10.2026)
+# SRNE karavan projesi — sohbet özeti (29.10.2026)
 
 ## Sistem
 - **SR-CU2 G2** (fw V3.0.8 / V3.0.2, hw 00030000) — merkez; RS485/CAN (RV-C) portları, 6 röle, 8 sıcaklık/tank girişi
@@ -24,14 +24,18 @@
   Türkçe yok; BMS portu ve CU2/RMA7 protokolleri iç protokol, paylaşılmıyor.
 - 27.10: Kurtarma amaçlı RMA7 dosyası istendi.
 - 28.10: Zeno ekran sürümünü sordu, dosya arayacağını söyledi; RMA10 çok dilli dedi.
-  Cevap: **Ver 1.0.14** gönderildi. Dosya bekleniyor.
+  Cevap: **Ver 1.0.14** gönderildi.
+- 29.10: Zeno dosyaları WhatsApp'tan gönderdi: `RMA7 Screen Upgrade Tutorial.docx` (6,6 MB) ve
+  `13050400010_RMA7(SRNE)_HMIMCU_05_V1.0.16_….tft` (31,8 MB). **Gelen sürüm V1.0.16**, ekrandaki
+  1.0.14 → CU2 (V3.0.8/V3.0.2) ile uyumluluğu soruldu. SD kart kapasite sınırı var (talimatta).
+  Dosyalar yedeklenecek, ekrana henüz yüklenmeyecek.
 
 ## Bekleyen işler
 - [ ] Shunt ayarları + RMA7 akü sayfası fotoğrafı
 - [ ] Şebeke göstergesi düzeneği (5 pinli 12V oto rölesi gerekebilir)
 - [ ] Waveshare kart gelince: CU2 BMS portunu dinleme (RS485 + CAN)
 - [ ] (İsteğe bağlı) CU2 port 6 / RMA7 hattını dinleme (USB-RS485, pin 7/6/5; 3 ve 8'de 13.2V)
-- [ ] SRNE'den RMA7 dosyası gelirse yedekle ve incele
+- [ ] RMA7 V1.0.16 dosyalarını bilgisayar + Drive'a yedekle, talimatı birlikte oku; uyumluluk cevabını bekle
 - [ ] Aküler gelince: JK ayarları, MAC adresleri, köprü yazılımı
 
 ## Repo
